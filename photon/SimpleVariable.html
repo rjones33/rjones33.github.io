@@ -10,7 +10,8 @@
 	<span id="curr_page"></span><br>
 	<br>
     <button id="connectbutton" onclick="start()">Get Tank Level</button>
-
+	<br>
+	<br>
     <script type="text/javascript">
 	var d = new Date();
     var curr_date = d.getDate();
@@ -38,6 +39,9 @@
                  });
     }
 	document.getElementById("curr_page").innerHTML = "Page Load Time: " + curr_month + "-" + curr_date + "-" + curr_year + " " + curr_hour + ":" + curr_min + ":" + curr_sec;
-    </script>
+	</script>
+	<iframe width="450" height="250" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/218623/charts/1"></iframe>
+	
 </body>
 </html>
+
