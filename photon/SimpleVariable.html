@@ -2,37 +2,51 @@
 <html>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <body>
-    <span id="temp"></span>
-	<br>
-    <span id="tstamp"></span>
-	<br>
+	<span id="tempLevel"></span><br>
+	<span id="tempF"></span><br>
+	<span id="tempC"></span><br>
+    <span id="tstamp"></span><br>
 	<span id="curr_button"></span><br>
-	<button id="connectbutton" onclick="start()">Get Tank Level</button>
+	<button id="connectbutton" onclick="start()">Get Tank Information</button>
 	<br>
 	<br><span id="curr_page"></span>
 	<br>
     <script type="text/javascript">
 	var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth() + 1; //Months are zero based
-    var curr_year = d.getFullYear();
-    var curr_hour = d.getHours();
-    var curr_min = d.getMinutes();
-    var curr_sec = d.getSeconds();
+    	var curr_date = d.getDate();
+    	var curr_month = d.getMonth() + 1; //Months are zero based
+    	var curr_year = d.getFullYear();
+    	var curr_hour = d.getHours();
+    	var curr_min = d.getMinutes();
+    	var curr_sec = d.getSeconds();
 
     function start(objButton) {
 
-        document.getElementById("temp").innerHTML = "Waiting for data...";
+        document.getElementById("tempLevel").innerHTML = "Waiting for data...";
         document.getElementById("tstamp").innerHTML ="tstamp";
         
-		var deviceID = "2e0025000f47343432313031";
+	var deviceID = "2e0025000f47343432313031";
         var accessToken = "089182e41784dc0366f0e8dea2ffca53b88e1821";
         var varName = "varTankLevel";
-
+	var varName2 = "tempf";
+	var varname3 = "tempc";    
+	//get level variable
         requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName + "/?access_token=" + accessToken;
         $.getJSON(requestURL, function(json) {
-                 document.getElementById("temp").innerHTML = "Tank Level " + json.result.toFixed(2) + " inches";
-                 document.getElementById("temp").style.fontSize = "28px";
+                 document.getElementById("tempLevel").innerHTML = "Tank Level " + json.result.toFixed(2) + " inches";
+                 document.getElementById("tempLevel").style.fontSize = "28px";
+	});
+	//get tempf variable    
+	requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName2 + "/?access_token=" + accessToken;
+        $.getJSON(requestURL, function(json) {
+                 document.getElementById("tempF").innerHTML = "DB12 TempF " + json.result.toFixed(2) + " Far";
+                 document.getElementById("tempF").style.fontSize = "28px";
+	});
+	//get tempc variable and timestamp    
+	requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName + "/?access_token=" + accessToken;
+        $.getJSON(requestURL, function(json) {
+                 document.getElementById("tempC").innerHTML = "DB12 TempC " + json.result.toFixed(2) + " Cel";
+                 document.getElementById("tempC").style.fontSize = "28px";
 		 document.getElementById("tstamp").innerHTML = "Last Timestamp From Photon -- " + json.coreInfo.last_heard;
 	});
     }
