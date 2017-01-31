@@ -45,7 +45,7 @@
                  document.getElementById("tempF").style.fontSize = "28px";
 	});
 	//get tempc variable and timestamp    
-	requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName + "/?access_token=" + accessToken;
+	requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + varName3 + "/?access_token=" + accessToken;
         $.getJSON(requestURL, function(json) {
                  document.getElementById("tempC").innerHTML = "DB12 TempC " + json.result.toFixed(2) + " Cel";
                  document.getElementById("tempC").style.fontSize = "28px";
